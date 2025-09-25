@@ -3,7 +3,7 @@ let mano;
 let letras;
 let musica;
 let glitchSound;
-let criticalErrorImg; // "glitch.png"
+let criticalErrorImg; 
 let latec;
 
 let manoMasked;
@@ -48,7 +48,7 @@ function setup() {
   musica.setVolume(0); 
   musica.loop();  
 
-  // Crear máscara
+  // crear máscara
   maskImage = createImage(mano.width, mano.height);
   maskImage.loadPixels();
   for (let y = 0; y < mano.height; y++) {
@@ -65,7 +65,7 @@ function setup() {
   manoMasked = mano.get();
   manoMasked.mask(maskImage);
 
-  // Crear 4 tuercas iniciales
+  // crear 4 tuercas iniciales
   tuercas.push(crearTuerca(620, 420));
   tuercas.push(crearTuerca(480, 420));
   tuercas.push(crearTuerca(540, 690));
@@ -90,26 +90,26 @@ function draw() {
     }
   }
 
-  // Fondo y letras vibrantes
+  // fondo y letras vibrantes
   image(fondo, 0, 0, width, height);
   let offsetX = random(-3, 3);
   let offsetY = random(-3, 3);
   image(letras, 300 + offsetX, 200 + offsetY, 800, 100);
 
-  // Generar desarmalos solo si está permitido
+  // generar desarmalos solo si está permitido
   if (generandoDesarmalos && millis() - ultimoSpawn > intervalo) {
     crearDesarmalo();
     ultimoSpawn = millis();
   }
 
-  // Dibujar desarmalos extras
+  // dibujar desarmalos extras
   for (let d of desarmalosExtras) {
     let ox = random(-3, 3);
     let oy = random(-3, 3);
     image(d.img, d.x + ox, d.y + oy, d.w, d.h);
   }
 
-  // Actualizar y dibujar tuercas
+  // actualizar y dibujar tuercas
   for (let t of tuercas) {
     t.angulo = lerp(t.angulo, t.anguloObjetivo, t.velocidad);
     if (t.alpha > 0) {
@@ -153,13 +153,13 @@ function mousePressed() {
         glitchSound.play();
         tuercasEliminadas++;
 
-        // Generar nuevas tuercas mientras queden menos de 2 y no llegamos a 10 eliminadas
+        // generar nuevas tuercas mientras queden menos de 2 y no llegue a 10 eliminadas
         if (tuercasEliminadas < 15 && tuercas.length < 2) {
           let pos = random(posicionesTuercas);
           tuercas.push(crearTuerca(pos.x, pos.y));
         }
 
-        // Terminar juego al llegar a 10
+        // terminar juego al llegar a 10
         if (tuercasEliminadas >= 10) {
           terminarJuego();
         }
@@ -193,7 +193,6 @@ function terminarJuego() {
   juegoTerminado = true;
   generandoDesarmalos = false; // deja de crear nuevos desarmalos
   desarmalosExtras = []; // borrar desarmalos existentes
-  // NO eliminamos tuercas, solo detenemos desarmalos
 
   if (musica.isPlaying()) musica.stop();
   if (glitchSound.isPlaying()) glitchSound.stop();
@@ -205,4 +204,5 @@ function terminarJuego() {
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
 }
+
 
