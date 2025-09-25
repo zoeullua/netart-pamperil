@@ -73,7 +73,6 @@ function setup() {
 }
 
 function draw() {
-  background(0);
 
   if (juegoTerminado) {
     if (mostrandoGlitch) {
@@ -206,3 +205,4 @@ function terminarJuego() {
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
 }
+
